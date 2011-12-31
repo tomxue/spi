@@ -2,3 +2,4 @@ todo:
 	test the max speed
 	observe CS signal
 	test spidev3.0 & spidev3.1
+	trial: how to make a kernel module to enable spidev?
