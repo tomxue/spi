@@ -38,7 +38,7 @@ static uint16_t delay;
 static void transfer(int fd)
 {
         int ret;
-        uint8_t tx[] = {0x31,
+        uint8_t tx[] = {0x31, 0x32, 0x33,	//the comma here doesn't matter, tested by Tom Xue
 //                0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 //                0x40, 0x00, 0x00, 0x00, 0x00, 0x95,
 //                0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -47,14 +47,14 @@ static void transfer(int fd)
 //                0xDE, 0xAD, 0xBE, 0xEF, 0xBA, 0xAD,
 //                0xF0, 0x0D,
         };
-        uint8_t rx[ARRAY_SIZE(tx)] = {0, };
+        uint8_t rx[ARRAY_SIZE(tx)] = {0, };	//the comma here doesn't matter, tested by Tom Xue
         struct spi_ioc_transfer tr = {
                 .tx_buf = (unsigned long)tx,
                 .rx_buf = (unsigned long)rx,
                 .len = ARRAY_SIZE(tx),
                 .delay_usecs = delay,
                 .speed_hz = speed,
-                .bits_per_word = bits,
+                .bits_per_word = bits,	//important, bits = 8 means byte transfer is possible
         };
 
 //      ret = write(fd, tx, 1);                                                 
@@ -64,7 +64,7 @@ static void transfer(int fd)
                 pabort("can't send spi message");
 
 	printf("\nthe received data is below:");
-        for (ret = 0; ret < ARRAY_SIZE(tx); ret++) {
+        for (ret = 0; ret < ARRAY_SIZE(tx); ret++) {	//print the received data, by Tom Xue
                 if (!(ret % 6))
                         puts("");
                 printf("%.2X ", rx[ret]);
@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
         if (ret == -1)
                 pabort("can't get max speed hz");
 
+	printf("open device: %s\n", device);
         printf("spi mode: %d\n", mode);
         printf("bits per word: %d\n", bits);
         printf("max speed: %d Hz (%d KHz)\n", speed, speed/1000);
