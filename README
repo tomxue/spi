@@ -1,5 +1,6 @@
 todo:
 	test the max speed
+	to make DMA mode work
 	observe CS signal
 	test spidev3.0 & spidev3.1
 	trial: how to make a kernel module to enable spidev?
