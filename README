@@ -1,6 +1,11 @@
-todo:
-	test the max speed
+TODO:
 	to make DMA mode work
 	observe CS signal
 	test spidev3.0 & spidev3.1
 	trial: how to make a kernel module to enable spidev?
+
+test the max speed: 
+	speed=20M, real speed=12MHz; 
+	speed=30M, real speed=24MHz;
+	speed=48M, real speed=48MHz, and this is the max value
+
