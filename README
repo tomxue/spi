@@ -8,7 +8,7 @@ test the max speed:
 	speed=30M, real speed=24MHz;
 	speed=48M, real speed=48MHz, and this is the max value
 	
-
+================================================================
 For kernel version 3.8.11-x3.4, after reboot, no /dev/spidev cannot be found.
 While for kernel version 3.0.4-x3, after reboot:
 ubuntu@omap:~$ ls /dev/spidev* -al
@@ -16,11 +16,15 @@ crw------- 1 root root 153, 0 2013-07-26 06:45 /dev/spidev3.0
 crw------- 1 root root 153, 1 2013-07-26 06:45 /dev/spidev3.1
 crw------- 1 root root 153, 2 2013-07-26 06:45 /dev/spidev4.0
 
-==========================================================================
+================================
 One way is below:
 ubuntu@omap:~$ cat /proc/devices | grep spi
 153 spi
 
 And then mknod /dev/spidev4.0 c 153 0
 But it doesn't work well, too!
-========================================================================== 
+================================
+Solution from RobertCNelson:
+
+add "buddy=spidev" to your bootargs, such that the kernel will enable spidev... 
+================================================================
