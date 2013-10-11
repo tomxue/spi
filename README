@@ -27,4 +27,6 @@ But it doesn't work well, too!
 Solution from RobertCNelson:
 
 add "buddy=spidev" to your bootargs, such that the kernel will enable spidev... 
+
+Tom Xue: that is to add "buddy=spidev" to uEnv.txt, which is in boot partition of SD card
 ================================================================
